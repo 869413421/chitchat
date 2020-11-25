@@ -1,7 +1,7 @@
 package routes
 
 import (
-	_ "github.com/gorilla/mux"
+	"github.com/gorilla/mux"
 )
 
 // 返回一个 mux.Router 类型指针，从而可以当作处理器使用
