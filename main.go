@@ -12,13 +12,12 @@ func main() {
 
 func startWebServer(port string) {
 	r := NewRouter()
-	http.Handle("/", r)
-
 	// 处理静态资源文件
 	assets := http.FileServer(http.Dir("public"))
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", assets))
 
-	log.Println("Starting Http Service at" + port)
+	http.Handle("/", r)
+	log.Println("Starting Http Service at " + port)
 	err := http.ListenAndServe(":"+port, nil)
 
 	if err != nil {

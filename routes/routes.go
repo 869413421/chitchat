@@ -1,6 +1,9 @@
 package routes
 
-import "net/http"
+import (
+	"chitchat/handlers"
+	"net/http"
+)
 
 type WebRoute struct {
 	Name        string
@@ -14,5 +17,63 @@ type WebRoutes []WebRoute
 
 // 定义所有 Web 路由
 var webRoutes = WebRoutes{
-
+	{
+		"home",
+		"GET",
+		"/",
+		handlers.Index,
+	},
+	{
+		"signup",
+		"GET",
+		"/signup",
+		handlers.Signup,
+	},
+	{
+		"signupAccount",
+		"POST",
+		"/signup_account",
+		handlers.SignupAccount,
+	},
+	{
+		"login",
+		"GET",
+		"/login",
+		handlers.Login,
+	},
+	{
+		"auth",
+		"POST",
+		"/authenticate",
+		handlers.Authenticate,
+	},
+	{
+		"logout",
+		"GET",
+		"/logout",
+		handlers.Logout,
+	},
+	{
+		"newThread",
+		"GET",
+		"/thread/new",
+		handlers.NewThread,
+	},
+	{
+		"createThread",
+		"POST",
+		"/thread/create",
+		handlers.CreateThread,
+	},
+	{
+		"readThread",
+		"GET",
+		"/thread/read",
+		handlers.ReadThread,
+	},{
+		"postThread",
+		"POST",
+		"/thread/post",
+		handlers.PostThread,
+	},
 }
