@@ -19,6 +19,7 @@ func SignupAccount(write http.ResponseWriter, request *http.Request) {
 	err := request.ParseForm()
 	if err != nil {
 		fmt.Println("Cannot parse form")
+		danger(err, "Cannot parse form")
 	}
 
 	user := models.User{
@@ -28,8 +29,8 @@ func SignupAccount(write http.ResponseWriter, request *http.Request) {
 	}
 
 	if err := user.Create(); err != nil {
-		fmt.Println(err)
-		fmt.Println("Cannot create user")
+		fmt.Println("Cannot parse form")
+		danger(err, "Cannot create user")
 	}
 
 	http.Redirect(write, request, "/login", 302)
@@ -41,12 +42,12 @@ func Authenticate(writer http.ResponseWriter, request *http.Request) {
 	err := request.ParseForm()
 	user, err := models.UserByEmail(request.PostFormValue("email"))
 	if err != nil {
-		fmt.Println("Cannot find user")
+		danger(err, "Cannot find user")
 	}
 	if user.Password == models.Encrypt(request.PostFormValue("password")) {
 		session, err := user.CreateSession()
 		if err != nil {
-			fmt.Println("Cannot create session")
+			danger(err, "Cannot create session")
 		}
 		cookie := http.Cookie{
 			Name:     "_cookie",
@@ -65,7 +66,7 @@ func Authenticate(writer http.ResponseWriter, request *http.Request) {
 func Logout(writer http.ResponseWriter, request *http.Request) {
 	cookie, err := request.Cookie("_cookie")
 	if err != http.ErrNoCookie {
-		fmt.Println("Failed to get cookie")
+		warning(err, "Failed to get cookie")
 		session := models.Session{Uuid: cookie.Value}
 		session.DeleteByUUID()
 	}

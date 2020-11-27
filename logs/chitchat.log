@@ -1,0 +1,2 @@
+WARNING 2020/11/27 14:22:22 helper.go:38: <nil> Failed to get cookie
+ERROR 2020/11/27 14:22:34 helper.go:33: sql: no rows in result set Cannot create user
