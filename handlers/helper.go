@@ -5,6 +5,7 @@ import (
 	"chitchat/models"
 	"errors"
 	"fmt"
+	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"html/template"
 	"log"
 	"net/http"
@@ -13,6 +14,7 @@ import (
 )
 
 var logger *log.Logger
+var localizer *i18n.Localizer
 
 func init() {
 	config := LoadConfig()
@@ -22,6 +24,9 @@ func init() {
 	}
 
 	logger = log.New(file, "INFO", log.Ldate|log.Ltime|log.Lshortfile)
+
+	// 获取本地化实例
+	localizer = i18n.NewLocalizer(config.LocaleBundle, config.App.Language)
 }
 
 func info(args ...interface{}) {

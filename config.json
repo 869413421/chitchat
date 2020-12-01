@@ -2,7 +2,9 @@
   "App": {
     "Address": "127.0.0.1:8989",
     "Static": "public",
-    "Log": "logs"
+    "Log": "logs",
+    "Locale": "locales",
+    "Language": "zh"
   },
   "Db": {
     "Driver": "mysql",
