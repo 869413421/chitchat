@@ -1,0 +1,14 @@
+{
+  "App": {
+    "Address": "127.0.0.1:8989",
+    "Static": "public",
+    "Log": "logs"
+  },
+  "Db": {
+    "Driver": "mysql",
+    "Address": "47.94.155.227:3306",
+    "Database": "chitchat",
+    "User": "root",
+    "Password": "Ym135168."
+  }
+}

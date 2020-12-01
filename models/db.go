@@ -1,6 +1,7 @@
 package models
 
 import (
+	. "chitchat/config"
 	"crypto/rand"
 	"crypto/sha1"
 	"database/sql"
@@ -13,7 +14,11 @@ var Db *sql.DB
 
 func init() {
 	var err error
-	Db, err = sql.Open("mysql", "root:Ym135168.@tcp(47.94.155.227:3306)/chitchat?charset=utf8&parseTime=true")
+	config := LoadConfig() // 加载全局配置实例
+	driver := config.Db.Driver
+	source := fmt.Sprintf("%s:%s@(%s)/%s?charset=utf8&parseTime=true", config.Db.User, config.Db.Password,
+		config.Db.Address, config.Db.Database)
+	Db, err = sql.Open(driver, source)
 	if err != nil {
 		log.Fatal(err)
 	}
